@@ -9,10 +9,10 @@
  </pre>
 <center><table>
  <tr>
-  <th><img src="images/emi.jpg" height="150" width="130"></th>
-  <th><img src="images/emi.jpg" height="150" width="150"></th>
-  <th><img src="images/emi.jpg" height="150" width="150"></th>
-  <th><img src="images/emi.jpg" height="150" width="150"></th>
+  <th><img src="images/emi.png" height="150" width="130"></th>
+  <th><img src="images/emi.png" height="150" width="150"></th>
+  <th><img src="images/emi.png" height="150" width="150"></th>
+  <th><img src="images/emi.png" height="150" width="150"></th>
  </tr>
  <tr>
   <th><p align="center">Kesaranee Trisawatwong</p></th> 
