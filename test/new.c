@@ -34,7 +34,7 @@ int pass(){
     int check = 0;
     char password[10], buffer_pass[10];
     printf("ENTER PASSWORD :");
-    scanf("%s", pass);
+    scanf("%s", password);
     fscanf(pass_csv, "%s", buffer_pass);
     while(strcmp(buffer_pass, "END") != 0){
         fscanf(pass_csv, "%s", buffer_pass);
