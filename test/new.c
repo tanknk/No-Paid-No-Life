@@ -4,7 +4,7 @@
 
 int pass();
 
-int id(){
+int main(){
     FILE *id_csv;
     id_csv = fopen("id.csv", "r");
     int check = 0;
@@ -24,7 +24,7 @@ int id(){
     }
     else{
         printf("TRY AGAIN\n");
-        id();
+        main();
     }
 }
 
@@ -32,20 +32,19 @@ int pass(){
     FILE *pass_csv;
     pass_csv = fopen("pass.csv", "r");
     int check = 0;
-    char pass[10], buffer_pass[10];
+    char password[10], buffer_pass[10];
     printf("ENTER PASSWORD :");
     scanf("%s", pass);
     fscanf(pass_csv, "%s", buffer_pass);
     while(strcmp(buffer_pass, "END") != 0){
         fscanf(pass_csv, "%s", buffer_pass);
-        if(strcmp(buffer_pass, pass) == 0){
+        if(strcmp(buffer_pass, password) == 0){
             check = 1;
         }
     }
     if(check){
-        printf("LOGIN SUCCESSFUL!\n");
         fclose(pass_csv);
-        return 0;
+        printf("LOGIN SUCCESSFUL!\n");
     }
     else{
         printf("WRONG PASSWORD TRY AGAIN\n");
