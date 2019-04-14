@@ -4,10 +4,10 @@
 # Author
 <pre>
  <b>IT KMITL#16</b> <br />
- 1.Miss Kesaranee Trisawatwong  61070018 <br />
- 2.Mr.  Kunakorn  Kositsakul    61070020 <br />
- 3.Mr.  Nattakit  Sumreth       61070052 <br />
- 4.Mr.  Saran     Hanthongkam   61070216 <br />
+ 1) Miss Kesaranee Trisawatwong  61070018 <br />
+ 2) Mr.  Kunakorn  Kositsakul    61070020 <br />
+ 3) Mr.  Nattakit  Sumreth       61070052 <br />
+ 4) Mr.  Saran     Hanthongkam   61070216 <br />
  </pre>
 <center><table>
  <tr>
