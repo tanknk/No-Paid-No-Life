@@ -1,9 +1,6 @@
 #include "stdio.h"
 #include "string.h"
 #include "conio.h"
-struct data{
-    char id_x[10], pass_x[10];
-};
 
 main(){
     FILE *log;
