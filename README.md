@@ -1,6 +1,6 @@
 # No-Paid-No-Life
 
-# WEBSITE
+# Website
 <pre>
 <a href="https://tanknk.github.io/No-Paid-No-Life/">https://tanknk.github.io/No-Paid-No-Life/</a>
 </pre>
