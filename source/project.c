@@ -12,7 +12,7 @@ int main(){
 
 int id(){
     FILE *id_csv;
-    id_csv = fopen("id.csv", "a+");
+    id_csv = fopen("../data/id.csv", "a+");
     int check = 0, decision;
     char id[10], buffer_id[10];
     printf("ENTER ID :");
@@ -33,22 +33,24 @@ int id(){
         printf(": This user not found. Did you want to register? :\n");
         printf(":         Put 1 if you want to register          :\n");
         printf(":         Put 2 if you want to log in again      :\n");
+        printf(":         Put 3 if you want to shut down         :\n");
         printf("+------------------------------------------------+\n");
         scanf("%d", &decision);
-        while(decision > 2){
+        while(decision > 3){
            printf("WRONG COMMAND TRY AGAIN PLZ\n");
            scanf("%d", &decision);
         }
         switch(decision){
             case 1: regis(); fclose(id_csv); break;
             case 2: main(); break;
+            case 3: return 0; break;
         }      
     }
 }
 
 int pass(){
     FILE *pass_csv;
-    pass_csv = fopen("pass.csv", "a+");
+    pass_csv = fopen("../data/pass.csv", "a+");
     int check = 0;
     char password[10], buffer_pass[10];
     printf("ENTER PASSWORD :");
@@ -73,14 +75,14 @@ int pass(){
 
 int regis(){
     FILE *regis_idcsv;
-    regis_idcsv = fopen("id.csv", "a+");
+    regis_idcsv = fopen("../data/id.csv", "a+");
     char id_regis[10];
     printf("Your ID: ");
     scanf("%s", id_regis);
     fprintf(regis_idcsv, "%s\n", id_regis);
     fclose(regis_idcsv);
     FILE *regis_passcsv;
-    regis_passcsv = fopen("pass.csv", "a+");
+    regis_passcsv = fopen("../data/pass.csv", "a+");
     char pass_regis[10];
     printf("Your Password: ");
     scanf("%s", pass_regis);
