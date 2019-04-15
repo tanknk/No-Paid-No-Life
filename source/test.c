@@ -100,7 +100,7 @@ int regis(){
     char id_regis[10];
     printf("Your ID : ");
     scanf("%s", id_regis);
-    fprintf(regis_idcsv, ",\n%s", id_regis);
+    fprintf(regis_idcsv, "\n%s", id_regis);
     fclose(regis_idcsv);
     FILE *regis_passcsv;
     regis_passcsv = fopen("../data/pass.csv", "a+");
