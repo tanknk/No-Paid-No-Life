@@ -1,6 +1,8 @@
 #include "stdio.h"
 #include "string.h"
 #include "conio.h"
+#include "ctype.h"
+
 int intro(); //ฟังก์ชั่น Intro
 int id();    //ฟังก์ชั่นเช็คว่ามี ID อยู่ในฐานข้อมูลมั้ย
 int pass();  //ฟังก์ชั่นเช็คว่ามี Password อยู่ในฐานข้อมูลมั้ย
@@ -156,19 +158,41 @@ int pass(){
 
 int regis(){
     FILE *regis_idcsv;
-    regis_idcsv = fopen("../data/id.csv", "a+");
-    char id_regis[10];
-    printf("Your ID : ");
-    scanf("%s", id_regis);
-    fprintf(regis_idcsv, "%s\n", id_regis);
-    fclose(regis_idcsv);
-    FILE *regis_passcsv;
-    regis_passcsv = fopen("../data/pass.csv", "a+");
-    char pass_regis[10];
-    printf("Your Password : ");
-    scanf("%s", pass_regis);
-    fprintf(regis_passcsv, "%s\n", pass_regis);
-    printf("REGISTER SUCCESSFUL!\n");
-    printf("PLEASE LOG IN AGAIN !\n");
-    id();
+    regis_idcsv = fopen("../data/id.csv", "a");
+    char id_regis[10], ch;
+    int cantuse = 1, pos =0;
+    while(cantuse){
+        cantuse = 0;
+        printf("Your Id : ");
+        // scanf("%s",id_regis);
+        while(1){
+            ch = getch();
+            if (ch == 13 && pos == 0){
+                printf("\nPlease Enter the ID\n");
+                cantuse = 1;
+                break;
+            }else if (ch == 13){ //ENTER
+                break;
+            }else if(ch == 8){ //BACLSPACE
+                if (pos > 0){ //ถ้าเป็น 0 คือยังไม่ได้กรอกพาส
+                    pos--;
+                    id_regis[pos] == '\0';
+                    printf("\b \b");}
+            }
+            else if (ch == 32 || ch == 9 || !isalnum(ch)){ //SPACE , TAB , SPECIAL
+                continue;}
+            else{
+                if(pos < 10){
+                    id_regis[pos] = ch;
+                    pos++;
+                    printf("%c", ch);
+                }else{
+                    continue;
+                }
+            }}
+            id_regis[pos] = '\0';
+            printf("\n");
+            fprintf(regis_idcsv, "\n%s", id_regis);
+            fclose(regis_idcsv);
+        }
 }

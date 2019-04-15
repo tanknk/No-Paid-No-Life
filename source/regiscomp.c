@@ -110,15 +110,15 @@ int regis(){
                 printf("\nPlease Enter the ID\n");
                 cantuse = 1;
                 break;
-            }else if (ch == 13){
+            }else if (ch == 13){ //ENTER
                 break;
-            }else if(ch == 8){
+            }else if(ch == 8){ //BACLSPACE
                 if (pos > 0){ //ถ้าเป็น 0 คือยังไม่ได้กรอกพาส
                     pos--;
                     id_regis[pos] == '\0';
                     printf("\b \b");}
             }
-            else if (ch == 32 || ch == 9 || !isalnum(ch)){ //SPACE , TAB
+            else if (ch == 32 || ch == 9 || !isalnum(ch)){ //SPACE , TAB , SPECIAL
                 continue;}
             else{
                 if(pos < 10){
@@ -128,18 +128,10 @@ int regis(){
                 }else{
                     continue;
                 }
-            }
+            }}
+            id_regis[pos] = '\0';
+            printf("\n");
+            fprintf(regis_idcsv, "\n%s", id_regis);
+            fclose(regis_idcsv);
         }
-        }
-        
-        // if (strlen(id_regis) == 0){
-        //     printf("Please Enter the ID\n");
-        // }else{
-        //     for (int i=0;id_regis[i] != '\0';i++){
-        //         if (!isalnum(id_regis[i])){ //ถ้าเจอตัวที่ไม่ใช่ตัวเลขกับตัวอักษรให้วนลูปใหม่
-        //             cantuse = 1;
-        //             printf("%c is can't use\n", id_regis[i]);
-        //             printf("Pls try again with alphabet and number only!\n");
-        //             break;}}}
-    fclose(regis_idcsv);
 }
