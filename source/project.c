@@ -4,7 +4,7 @@
 int intro(); //ฟังก์ชั่น Intro
 int id();    //ฟังก์ชั่นเช็คว่ามี ID อยู่ในฐานข้อมูลมั้ย
 int pass();  //ฟังก์ชั่นเช็คว่ามี Password อยู่ในฐานข้อมูลมั้ย
-int regis(); // ฟังก์ชั่นสมัครสมาชิก
+int regis(); //ฟังก์ชั่นสมัครสมาชิก
 
 int main(){
     intro();
@@ -14,8 +14,8 @@ int intro(){
     int decision;
     printf("+----------------------------------+\n");
     printf(":    WELCOME TO NO PAID NO LIFE    :\n");
-    printf(": Put 1 If this's your first time  :\n");
-    printf(": Put 2 If you have an account     :\n");
+    printf(": Put 1 if this's your first time  :\n");
+    printf(": Put 2 if you have an account     :\n");
     printf(": Put 3 if you want to shut down   :\n");
     printf("+----------------------------------+\n");
     printf("Your Choice : ");
@@ -107,7 +107,7 @@ int regis(){
     char pass_regis[10];
     printf("Your Password : ");
     scanf("%s", pass_regis);
-    fprintf(regis_passcsv, "%s", pass_regis);
+    fprintf(regis_passcsv, "%s\n", pass_regis);
     printf("REGISTER SUCCESSFUL!\n");
     printf("PLEASE LOG IN AGAIN !\n");
     main();
