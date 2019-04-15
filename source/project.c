@@ -22,6 +22,7 @@ int intro(){
     scanf("%d", &decision);
     while(decision > 3){
         printf("Wrong Command, Try Again pls\n");
+        printf("Your Choice : ");
         scanf("%d", &decision);
     }
     switch(decision){
@@ -55,6 +56,7 @@ int id(){
         scanf("%d", &decision);
         while(decision > 2){
             printf("Wrong command, Try again pls\n");
+            printf("Your Choice : ");
             scanf("%d", &decision);
         }
         switch(decision){
@@ -74,13 +76,14 @@ int id(){
         printf("+------------------------------------------------+\n");
         printf(":                 ID not found                   :\n");
         printf(":         Put 1 if you want to register          :\n");
-        printf(":         Put 2 if you want to log in again      :\n");
+        printf(":         Put 2 if you want to try again         :\n");
         printf(":         Put 3 if you want to shut down         :\n");
         printf("+------------------------------------------------+\n");
         printf("Your Choice : ");
         scanf("%d", &decision);
         while(decision > 3){
             printf("Wrong command, Try again pls\n");
+            printf("Your Choice : ");
             scanf("%d", &decision);
         }
         switch(decision){
@@ -116,6 +119,7 @@ int pass(){
         scanf("%d", &decision);
         while(decision > 2){
             printf("Wrong command, Try again pls\n");
+            printf("Your Choice : ");
             scanf("%d", &decision);
         }
         switch(decision){
@@ -140,6 +144,7 @@ int pass(){
         scanf("%d", &decision);
         while(decision > 2){
             printf("Wrong command, Try again pls\n");
+            printf("Your Choice : ");
             scanf("%d", &decision);
         }
         switch(decision){
