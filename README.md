@@ -1,5 +1,14 @@
 # No-Paid-No-Life
+
+# Update
+<pre>
+1.Update Log in & Register 15/4/2019 12:40 PM
+</pre>
+
 # Description
+<pre>
+ดองไว้แปป
+</pre>
 
 # Author
 <pre>
