@@ -134,4 +134,87 @@ int regis(){
             fprintf(regis_idcsv, "\n%s", id_regis);
             fclose(regis_idcsv);
         }
-}
+
+    FILE *regis_passcsv;
+    regis_passcsv = fopen("../data/pass.csv", "a+");
+    char pass_regis[10], pass_check[10];
+    pos = 0; // reuse variable
+    cantuse = 1; // aka notsame
+
+    while(cantuse){
+        printf("Password : ");
+        while(1){
+            ch = getch();
+            if (ch == 13 && pos == 0){
+                printf("\nPlease Enter your password\n");
+                cantuse = 1;
+                break;
+            }else if (ch == 13){ //ENTER
+                break;
+            }
+            else if(ch == 8){
+                if (pos > 0){ //ถ้าเป็น 0 คือยังไม่ได้กรอกพาส
+                    pos--;
+                    pass_regis[pos] == '\0';
+                    printf("\b \b");}
+            }
+            else if (ch == 32 || ch == 9 || !isalnum(ch)){ //SPACE , TAB
+                continue;}
+            else
+            {
+                if(pos < 10){
+                    pass_regis[pos] = ch;
+                    pos++;
+                    printf("*");
+                }else{
+                    continue;
+                }
+            }
+        }
+        pass_regis[pos] = '\0';
+        pos = 0;
+        printf("\n");
+
+        printf("Re-Password : ");
+        while(1){
+            ch = getch();
+            if (ch == 13 && pos == 0){
+                printf("\nPlease Enter your re-password\n");
+                cantuse = 1;
+                break;
+            }else if (ch == 13){ //ENTER
+                break;
+            }
+            else if(ch == 8){
+                if (pos > 0){ //ถ้าเป็น 0 คือยังไม่ได้กรอกพาส
+                    pos--;
+                    pass_check[pos] == '\0';
+                    printf("\b \b");}
+            }
+            else if (ch == 32 || ch == 9 || !isalnum(ch)){ //SPACE , TAB
+                continue;}
+            else
+            {
+                if(pos < 10){
+                    pass_check[pos] = ch;
+                    pos++;
+                    printf("*");
+                }else{
+                    continue;
+                }
+            }
+        }
+        pass_check[pos] = '\0';
+        printf("\n");
+        
+        // ***** เหลือ add function กดย้อนกลับในโปรแกรมจะได้ไม่ต้องยุ่งยากเปิดโปรแกรมปิดใหม่ *********
+        if(strcmp(pass_regis, pass_check) == 0){
+            cantuse = 0;
+            fprintf(regis_passcsv, "%s", pass_check);
+            fclose(regis_passcsv);
+            printf("REGISTER success!\n");
+        }else{
+            printf("Password and Re-password are not the same.Pls Enter again.\n");
+        }
+    
+}}
