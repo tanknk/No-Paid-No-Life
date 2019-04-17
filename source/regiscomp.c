@@ -8,6 +8,7 @@ int pass();  //ฟังก์ชั่นเช็คว่ามี Password �
 int regis(); // ฟังก์ชั่นสมัครสมาชิก
 
 int main(){
+    system("cls");
     intro();
 }
 
@@ -99,9 +100,11 @@ int regis(){
     FILE *regis_idcsv;
     regis_idcsv = fopen("../data/id.csv", "a");
     char id_regis[10], ch;
+    // , buffer[10];
     int cantuse = 1, pos =0;
     while(cantuse){
         cantuse = 0;
+        pos = 0;
         printf("Your Id : ");
         // scanf("%s",id_regis);
         while(1){
@@ -130,10 +133,19 @@ int regis(){
                 }
             }}
             id_regis[pos] = '\0';
-            printf("\n");
-            fprintf(regis_idcsv, "\n%s", id_regis);
-            fclose(regis_idcsv);
+            // fscanf(regis_idcsv, "%s", buffer);
+            // while(buffer){ //chk username ซ้ำ
+            //     fscanf(regis_idcsv, "%s", buffer);
+            //     printf("\ntest: %s\n", buffer);
+            //     if(strcmp(buffer, id_regis) == 0){
+            //         printf("\nThis username is used.Pls use another one.\n");
+            //         cantuse = 1;
+            //     }
+            // }
         }
+    printf("\n");
+    fprintf(regis_idcsv, "\n%s", id_regis);
+    fclose(regis_idcsv);
 
     FILE *regis_passcsv;
     regis_passcsv = fopen("../data/pass.csv", "a+");
@@ -210,7 +222,7 @@ int regis(){
         // ***** เหลือ add function กดย้อนกลับในโปรแกรมจะได้ไม่ต้องยุ่งยากเปิดโปรแกรมปิดใหม่ *********
         if(strcmp(pass_regis, pass_check) == 0){
             cantuse = 0;
-            fprintf(regis_passcsv, "%s", pass_check);
+            fprintf(regis_passcsv, "\n%s", pass_check);
             fclose(regis_passcsv);
             printf("REGISTER success!\n");
         }else{
