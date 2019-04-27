@@ -1,10 +1,5 @@
 # No-Paid-No-Life
 
-# Website
-<pre>
-<a href="https://tanknk.github.io/No-Paid-No-Life/">https://tanknk.github.io/No-Paid-No-Life/</a>
-</pre>
-
 # Update
 <pre>
 1.Update Log in & Register 15/4/2019 12:40 PM
