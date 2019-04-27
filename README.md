@@ -8,7 +8,6 @@
 # Update
 <pre>
 1.Update Log in & Register 15/4/2019 12:40 PM
-2.Update Website           15/4/2019 16:50 PM
 </pre>
 
 # Description
