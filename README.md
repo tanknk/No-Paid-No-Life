@@ -40,4 +40,4 @@
  
 <br />
 
-<img src="https://forthebadge.com/images/badges/made-with-c.svg"/>
+<img src="https://forthebadge.com/images/badges/made-with-c.svg"/>&nbsp;&nbsp;<img src="https://forthebadge.com/images/badges/built-with-love.svg"/>
