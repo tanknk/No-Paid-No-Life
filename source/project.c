@@ -24,6 +24,8 @@ int main(){
 int regis(){
     int decision;
     char buffer[10];
+    FILE *check;
+    check = fopen("../data/check_id.txt", "rb"); // CHECK ID IN SYSTEM
     system("cls");
     printf("Please Enter Your Information Correctly\n");
     /* USERNAME */
@@ -148,7 +150,7 @@ int regis(){
     printf("\n");
     if(strcmp(password, password2) == 0){
         strcpy(data.pass, password);
-            printf("+------------------------------+\n");
+            printf("\n\n+------------------------------+\n");
             printf("+    Are u sure to register?   +\n");
             printf("+      Put 1 if u sure         +\n");
             printf("+      Put 2 if u not sure     +\n");
@@ -168,18 +170,26 @@ int regis(){
                 printf("+   Register Successful   +\n");
                 printf("+-------------------------+\n");
                 break;
+            case 2:
+                system("cls");
+                intro();
             }
         }
     else{
         printf("+-------------------------------------+\n");
         printf("+           Register Failed           +\n");
         printf("+  Password and Re-Password Not same  +\n");
+        printf("+        Press enter to continue      +\n");
         printf("+-------------------------------------+\n");
+        char enter;
+        while (enter != 13) { 
+            enter = getch();}
         intro();
     }
 }
 
 int intro(){
+    system("cls");
     int decision;
     printf("+----------------------------------+\n");
     printf(":    WELCOME TO NO PAID NO LIFE    :\n");
