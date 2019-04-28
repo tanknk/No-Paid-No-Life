@@ -1,4 +1,4 @@
-# No-Paid-No-Life
+# No Paid No Life
 
 # Abstract
 <pre>
