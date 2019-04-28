@@ -5,8 +5,8 @@
 #include "stdlib.h"
 
 struct save{
-    char id[10];      // Name
-    char pass[10];      // Lastname
+    char id[10];
+    char pass[10];
 }data;
 
 struct idcheck{
@@ -171,7 +171,10 @@ int regis(){
             }
         }
     else{
-        printf("Password and Re-Password Not same\n");
+        printf("+-------------------------------------+\n");
+        printf("+           Register Failed           +\n");
+        printf("+  Password and Re-Password Not same  +\n");
+        printf("+-------------------------------------+\n");
         intro();
     }
 }
@@ -219,8 +222,61 @@ int login(){
         FILE *logincsv;
         logincsv = fopen(buffer, "ab+");
         int state = 0;
-        printf("YOUR PASSWORD : ");
-        scanf("%s", pass);
+        int cant = 1, pos = 0;
+        char ch;
+        int decision;
+        while(cant){
+            cant = 0;
+            printf("Your Password : ");
+            while(1){
+                ch = getch();
+                if (ch == 13 && pos == 0){
+                    printf("\n");
+                    printf("+------------------------------------------------+\n");
+                    printf(":               No Password Entered              :\n");
+                    printf(":          Put 1 if you want to try again        :\n");
+                    printf(":          Put 2 if you want to shut down        :\n");
+                    printf("+------------------------------------------------+\n");
+                    printf("Your Choice : ");
+                    scanf("%d", &decision);
+                    while(decision > 2){
+                        printf("Wrong command, Try again pls\n");
+                        printf("Your Choice : ");
+                        scanf("%d", &decision);
+                        }
+                    switch(decision){
+                        case 1: break;
+                        case 2: return 0; break;
+                        }
+                    cant = 1;
+                    break;
+                    }
+                else if (ch == 13){ //ENTER
+                    break;
+                    }
+                else if(ch == 8){ //BACLSPACE
+                    if (pos > 0){ //ถ้าเป็น 0 คือยังไม่ได้กรอกพาส
+                        pos--;
+                        pass[pos] == '\0';
+                        printf("\b \b");}
+                    }
+                else if (ch == 32 || ch == 9 || !isalnum(ch)){ //SPACE , TAB , SPECIAL
+                    continue;
+                    }
+                else{
+                    if(pos < 10){
+                        pass[pos] = ch;
+                        pos++;
+                        printf("*");
+                        }
+                    else{
+                        continue;
+                        }
+                    }   
+                }
+                pass[pos] = '\0';
+            }
+        printf("\n");
         while(fread(&data,sizeof(data),1,logincsv) == 1){
             if(strcmp(id, data.id) == 0 && strcmp(pass, data.pass) == 0){
                 state = 1;
@@ -229,16 +285,22 @@ int login(){
         }
         if(state){
             fclose(logincsv);
-            printf("LOGIN SUCCESSFUL!!\n");
+            printf("+-----------------------+\n");
+            printf("+  LOGIN SUCCESSFUL!!!  +\n");
+            printf("+-----------------------+\n");
             return 0;
         }
         else{
-            printf("TRY AGAIN\n");
+            printf("+------------------+\n");
+            printf("+     TRY AGAIN    +\n");
+            printf("+------------------+\n");
             login();
         }
     }
     else{
-        printf("NOT FOUND THIS ID\n");
+        printf("+-------------------------+\n");
+        printf("+    NOT FOUND THIS ID    +\n");
+        printf("+-------------------------+\n");
         intro();
     }
 }
