@@ -23,15 +23,65 @@ int main(){
 
 int regis(){
     int decision;
-    char id[10], buffer[10];
+    char id[10], buffer[10], ch;
     int status_id = 1;
     FILE *check;
     check = fopen("../data/check_id.txt", "rb"); // CHECK ID IN SYSTEM
     system("cls");
     printf("Please Enter Your Information Correctly\n");
     /* USERNAME */
-    printf("Username: ");
-    scanf("%s", id);
+    // printf("Username: ");
+    // scanf("%s", id);
+
+    int cant = 1, pos =0;
+    while(cant){
+        cant = 0;
+        pos = 0;
+        printf("Username: ");
+        while(1){
+            ch = getch();
+            if (ch == 13 && pos == 0){
+                printf("\n");
+                printf("+------------------------------------------------+\n");
+                printf(":               No username Entered              :\n");
+                printf(":          Put 1 if you want to try again        :\n");
+                printf(":          Put 2 if you want to shut down        :\n");
+                printf("+------------------------------------------------+\n");
+                printf("Your Choice : ");
+                scanf("%d", &decision);
+                while(decision > 2){
+                    printf("Wrong command, Try again pls\n");
+                    printf("Your Choice : ");
+                    scanf("%d", &decision);
+                    }
+                switch(decision){
+                    case 1: break;
+                    case 2: return 0; break;
+                    }
+                cant = 1;
+                break;
+            }else if (ch == 13){ //ENTER
+                break;
+            }else if(ch == 8){ //BACLSPACE
+                if (pos > 0){ //ถ้าเป็น 0 คือยังไม่ได้กรอกพาส
+                    pos--;
+                    id[pos] == '\0';
+                    printf("\b \b");}
+            }
+            else if (ch == 32 || ch == 9 || !isalnum(ch)){ //SPACE , TAB , SPECIAL
+                continue;}
+            else{
+                if(pos < 10){
+                    id[pos] = ch;
+                    pos++;
+                    printf("%c", ch);
+                }else{
+                    continue;
+                }
+            }}
+            id[pos] = '\0';
+    }
+    printf("\n");
     while(fread(&id_data,sizeof(id_data),1,check) == 1){
         if(strcmp(id, id_data.id_check) == 0){
             status_id = 0;
@@ -48,7 +98,8 @@ int regis(){
         FILE *regis;
         regis = fopen(buffer, "ab+");
         /* PASSWORD */
-        int cant = 1, pos = 0;
+        cant = 1;
+        pos = 0;
         char password[10], ch;
         while(cant){
             cant = 0;
