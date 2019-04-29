@@ -23,163 +23,185 @@ int main(){
 
 int regis(){
     int decision;
-    char buffer[10];
+    char id[10], buffer[10];
+    int status_id = 1;
     FILE *check;
     check = fopen("../data/check_id.txt", "rb"); // CHECK ID IN SYSTEM
     system("cls");
     printf("Please Enter Your Information Correctly\n");
     /* USERNAME */
     printf("Username: ");
-    scanf("%s", data.id);
-    strcpy(buffer, "../data/");
-    strcat(buffer, data.id);
-    strcat(buffer, ".csv");
-    strcpy(id_data.id_check, data.id);
-    FILE *regis;
-    regis = fopen(buffer, "ab+");
-    /* PASSWORD */
-    int cant = 1, pos = 0;
-    char password[10], ch;
-    while(cant){
-        cant = 0;
-        printf("Your Password : ");
-        while(1){
-            ch = getch();
-            if (ch == 13 && pos == 0){
-                printf("\n");
-                printf("+------------------------------------------------+\n");
-                printf(":               No Password Entered              :\n");
-                printf(":          Put 1 if you want to try again        :\n");
-                printf(":          Put 2 if you want to shut down        :\n");
-                printf("+------------------------------------------------+\n");
-                printf("Your Choice : ");
-                scanf("%d", &decision);
-                while(decision > 2){
-                    printf("Wrong command, Try again pls\n");
-                    printf("Your Choice : ");
-                    scanf("%d", &decision);
-                    }
-                switch(decision){
-                    case 1: break;
-                    case 2: return 0; break;
-                    }
-                cant = 1;
-                break;
-                }
-            else if (ch == 13){ //ENTER
-                break;
-                }
-            else if(ch == 8){ //BACLSPACE
-                if (pos > 0){ //ถ้าเป็น 0 คือยังไม่ได้กรอกพาส
-                    pos--;
-                    password[pos] == '\0';
-                    printf("\b \b");}
-                }
-            else if (ch == 32 || ch == 9 || !isalnum(ch)){ //SPACE , TAB , SPECIAL
-                continue;
-                }
-            else{
-                if(pos < 10){
-                    password[pos] = ch;
-                    pos++;
-                    printf("*");
-                    }
-                else{
-                    continue;
-                    }
-                }   
-            }
-            password[pos] = '\0';
+    scanf("%s", id);
+    while(fread(&id_data,sizeof(id_data),1,check) == 1){
+        if(strcmp(id, id_data.id_check) == 0){
+            status_id = 0;
+            break;
         }
-    printf("\n");
-    /* RE-PASSWORD */
-    cant = 1, pos = 0;
-    char password2[10];
-    while(cant){
-        cant = 0;
-        printf("Re-Password : ");
-        while(1){
-            ch = getch();
-            if (ch == 13 && pos == 0){
-                printf("\n");
-                printf("+------------------------------------------------+\n");
-                printf(":               No Password Entered              :\n");
-                printf(":          Put 1 if you want to try again        :\n");
-                printf(":          Put 2 if you want to shut down        :\n");
-                printf("+------------------------------------------------+\n");
-                printf("Your Choice : ");
-                scanf("%d", &decision);
-                while(decision > 2){
-                    printf("Wrong command, Try again pls\n");
+    }
+    if(status_id){
+        strcpy(data.id,id);
+        fclose(check);
+        strcpy(buffer, "../data/");
+        strcat(buffer, data.id);
+        strcat(buffer, ".csv");
+        strcpy(id_data.id_check, data.id);
+        FILE *regis;
+        regis = fopen(buffer, "ab+");
+        /* PASSWORD */
+        int cant = 1, pos = 0;
+        char password[10], ch;
+        while(cant){
+            cant = 0;
+            printf("Your Password : ");
+            while(1){
+                ch = getch();
+                if (ch == 13 && pos == 0){
+                    printf("\n");
+                    printf("+------------------------------------------------+\n");
+                    printf(":               No Password Entered              :\n");
+                    printf(":          Put 1 if you want to try again        :\n");
+                    printf(":          Put 2 if you want to shut down        :\n");
+                    printf("+------------------------------------------------+\n");
                     printf("Your Choice : ");
                     scanf("%d", &decision);
-                }
-                switch(decision){
-                    case 1: break;
-                    case 2: return 0; break;
-                }
-                cant = 1;
-                break;
-                }
+                    while(decision > 2){
+                        printf("Wrong command, Try again pls\n");
+                        printf("Your Choice : ");
+                        scanf("%d", &decision);
+                        }
+                    switch(decision){
+                        case 1: break;
+                        case 2: return 0; break;
+                        }
+                    cant = 1;
+                    break;
+                    }
                 else if (ch == 13){ //ENTER
                     break;
-                }
+                    }
                 else if(ch == 8){ //BACLSPACE
                     if (pos > 0){ //ถ้าเป็น 0 คือยังไม่ได้กรอกพาส
                         pos--;
-                        password2[pos] == '\0';
-                        printf("\b \b");
+                        password[pos] == '\0';
+                        printf("\b \b");}
                     }
-                }
                 else if (ch == 32 || ch == 9 || !isalnum(ch)){ //SPACE , TAB , SPECIAL
                     continue;
-                }
+                    }
                 else{
                     if(pos < 10){
-                        password2[pos] = ch;
+                        password[pos] = ch;
                         pos++;
                         printf("*");
-                    }
+                        }
                     else{
                         continue;
+                        }
+                    }   
+                }
+                password[pos] = '\0';
+            }
+        printf("\n");
+        /* RE-PASSWORD */
+        cant = 1, pos = 0;
+        char password2[10];
+        while(cant){
+            cant = 0;
+            printf("Re-Password : ");
+            while(1){
+                ch = getch();
+                if (ch == 13 && pos == 0){
+                    printf("\n");
+                    printf("+------------------------------------------------+\n");
+                    printf(":               No Password Entered              :\n");
+                    printf(":          Put 1 if you want to try again        :\n");
+                    printf(":          Put 2 if you want to shut down        :\n");
+                    printf("+------------------------------------------------+\n");
+                    printf("Your Choice : ");
+                    scanf("%d", &decision);
+                    while(decision > 2){
+                        printf("Wrong command, Try again pls\n");
+                        printf("Your Choice : ");
+                        scanf("%d", &decision);
+                    }
+                    switch(decision){
+                        case 1: break;
+                        case 2: return 0; break;
+                    }
+                    cant = 1;
+                    break;
+                    }
+                    else if (ch == 13){ //ENTER
+                        break;
+                    }
+                    else if(ch == 8){ //BACLSPACE
+                        if (pos > 0){ //ถ้าเป็น 0 คือยังไม่ได้กรอกพาส
+                            pos--;
+                            password2[pos] == '\0';
+                            printf("\b \b");
+                        }
+                    }
+                    else if (ch == 32 || ch == 9 || !isalnum(ch)){ //SPACE , TAB , SPECIAL
+                        continue;
+                    }
+                    else{
+                        if(pos < 10){
+                            password2[pos] = ch;
+                            pos++;
+                            printf("*");
+                        }
+                        else{
+                            continue;
+                        }
                     }
                 }
+                password2[pos] = '\0';
             }
-            password2[pos] = '\0';
-        }
-    printf("\n");
-    if(strcmp(password, password2) == 0){
-        strcpy(data.pass, password);
-            printf("\n\n+------------------------------+\n");
-            printf("+    Are u sure to register?   +\n");
-            printf("+      Put 1 if u sure         +\n");
-            printf("+      Put 2 if u not sure     +\n");
-            printf("+------------------------------+\n");
-            printf("Your Choice : ");
-            scanf("%d", &decision);
-            switch(decision){
-            case 1:
-                system("cls");
-                fwrite(&data, sizeof(data), 1, regis);
-                fclose(regis);
-                FILE *check;
-                check = fopen("../data/check_id.txt", "ab+");
-                fwrite(&id_data, sizeof(id_data), 1, check);
-                fclose(check);
-                printf("+-------------------------+\n");
-                printf("+   Register Successful   +\n");
-                printf("+-------------------------+\n");
-                break;
-            case 2:
-                system("cls");
-                intro();
+        printf("\n");
+        if(strcmp(password, password2) == 0){
+            strcpy(data.pass, password);
+                printf("+------------------------------+\n");
+                printf("+    Are u sure to register?   +\n");
+                printf("+      Put 1 if u sure         +\n");
+                printf("+      Put 2 if u not sure     +\n");
+                printf("+------------------------------+\n");
+                printf("Your Choice : ");
+                scanf("%d", &decision);
+                switch(decision){
+                case 1:
+                    system("cls");
+                    fwrite(&data, sizeof(data), 1, regis);
+                    fclose(regis);
+                    FILE *check;
+                    check = fopen("../data/check_id.txt", "ab+");
+                    fwrite(&id_data, sizeof(id_data), 1, check);
+                    fclose(check);
+                    printf("+-------------------------+\n");
+                    printf("+   Register Successful   +\n");
+                    printf("+-------------------------+\n");
+                    intro();
+                case 2:
+                    system("cls");
+                    intro();
+                }
             }
+        else{
+            printf("+-------------------------------------+\n");
+            printf("+           Register Failed           +\n");
+            printf("+  Password and Re-Password Not same  +\n");
+            printf("+        Press enter to continue      +\n");
+            printf("+-------------------------------------+\n");
+            char enter;
+            while (enter != 13) { 
+                enter = getch();}
+            intro();
         }
+    }
     else{
         printf("+-------------------------------------+\n");
         printf("+           Register Failed           +\n");
-        printf("+  Password and Re-Password Not same  +\n");
-        printf("+        Press enter to continue      +\n");
+        printf("+      This username is in system     +\n");
+        printf("+       Press enter to continue       +\n");
         printf("+-------------------------------------+\n");
         char enter;
         while (enter != 13) { 
