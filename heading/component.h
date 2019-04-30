@@ -13,4 +13,38 @@ typedef struct{
     char name[20];  // Catagory Name
 }CAT;
 
+typedef struct{
+    int count;
+    int start_line;
+    int max_line;
+}EDIT;
+
+/* Current date */
+void current_date(char *date){
+    time_t t = time(NULL);
+    struct tm timeinfo = *localtime(&t);
+    sprintf(date, "%04d-%02d-%02d", timeinfo.tm_year+1900, timeinfo.tm_mon+1, timeinfo.tm_mday);
+}
+
+/* Check the date is valid or not */
+int valid_date(char *str){
+    char date[11];
+    strcpy(date, str);
+    char *token = strtok(date, "-");
+    int year = atoi(token);
+    token = strtok(NULL, "-");
+    int month = atoi(token);
+    token = strtok(NULL, "\0");
+    int day = atoi(token);
+    struct tm timeinfo = {0};
+    timeinfo.tm_year = year-1900;
+    timeinfo.tm_mon = month-1;
+    timeinfo.tm_mday = day;
+    timeinfo.tm_isdst = -1;
+    time_t r = mktime(&timeinfo);
+    if(r == -1 || (day != timeinfo.tm_mday) || (month-1 != timeinfo.tm_mon) || (year-1900 != timeinfo.tm_year))
+        return 0;
+    return 1;
+}
+
 #endif

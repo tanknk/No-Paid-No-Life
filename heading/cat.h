@@ -2,7 +2,7 @@
 #define CAT_H
 
 #define CAT_SIZE 52
-#define CAT_LINE 30
+#define CAT_LINE 26
 
 /* Convert string to CAT */
 CAT stocat(char* str){
@@ -44,7 +44,7 @@ int select_cat(char* str){
             strcpy(str, "E");
             break;
         }
-        printf("Error, Please thy again.\n");
+        printf("Error, Please try again.\n");
     }
     // 2nd Character
     while(1){
@@ -64,7 +64,7 @@ int select_cat(char* str){
                 goto jump1;
             }
         }
-        printf("Error, Please thy again.\n");   
+        printf("Error, Please try again.\n");   
     }
     jump1:
     // Skip 3rd if catagory is Income
@@ -85,18 +85,20 @@ int select_cat(char* str){
                 }
                 printf("%s\n", cat_ls[i].name);
             }
-        if(count == 0)
+        if(count == 0){
+            str[2] = '0';
             goto jump2;
+        }
         printf("Choose catagory: ");
         char choice;
         scanf(" %c", &choice);
         for(int i = 0; i < CAT_SIZE; i++){
             if(cat_ls[i].code[0] == str[0] && cat_ls[i].code[1] == str[1] && cat_ls[i].code[2] == choice){
                 str[2] = choice;
-                goto jump1;
+                goto jump2;
             }
         }
-        printf("Error, Please thy again.\n");   
+        printf("Error, Please try again.\n");   
     }
     jump2:
     return 0;

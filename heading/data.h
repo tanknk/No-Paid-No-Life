@@ -1,6 +1,8 @@
 #ifndef DATA_H
 #define DATA_H
 
+#define DATA_LINE 200
+
 /* Convert string to DATA */
 DATA stodata(char* str){
     DATA data;
@@ -47,7 +49,6 @@ int select_currency(char* str){
         default:
             return 1;
     }
-
 }
 
 /* Enter initial balance */
@@ -59,18 +60,34 @@ int enter_balance(double* double_ptr){
     return 1;
 }
 
+/* Enter amount */
+int enter_amount(double* double_ptr){
+    printf("\nEnter amount: ");
+    scanf(" %lf", double_ptr);
+    if(*double_ptr >= 0)
+        return 0;
+    return 1;
+}
+
 /* Initialize wallet */
 DATA init_wallet(){
     DATA data;
-    time_t t = time(NULL);
-    struct tm timeinfo = *localtime(&t);
-    sprintf(data.date, "%04d-%02d-%02d", timeinfo.tm_year+1900, timeinfo.tm_mon+1, timeinfo.tm_mday);
+    current_date(data.date);
     while(select_currency(data.cat))
-        printf("Error, Please thy again.\n"); 
+        printf("Error, Please try again.\n"); 
     while(enter_balance(&data.amount))
-        printf("Error, Please thy again.\n");
+        printf("Error, Please try again.\n");
     strcpy(data.note, "-\n");
     return data;
+}
+
+void data_list(char* filename, DATA* data){
+    FILE* fp = fopen(filename, "r");
+    int i = 0;
+    char str[DATA_LINE];
+    while(fgets(str, DATA_LINE, fp) != NULL)
+        data[i++] = stodata(str);
+    fclose(fp);
 }
 
 #endif

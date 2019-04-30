@@ -3,13 +3,6 @@
 
 #define DATA_LINE 200
 
-/* Swap string */
-void swap(char *str1, char *str2) { 
-    char *temp = str1; 
-    str1 = str2;
-    str2 = temp;
-}
-
 /* Counting line of file */
 int count_line(char* filename){
     FILE *fp = fopen(filename, "r");
@@ -52,46 +45,70 @@ int sort_trans(char* filename){
 }
 
 /* View current transections */
-void view_trans(char* filename){
-    char date[8];
-    printf("Enter date [YYYY-MM]: ");
+EDIT view_trans(char* filename){
+    EDIT edit;
+    edit.count = 0;
+    edit.start_line = 0;
+    edit.max_line = 1;
+    char date[11];
+    jump1:
+    printf("\n1: Current month\n");
+    printf("2: Specific month\n");
+    printf("Choose action: ");
+    char choice;
+    scanf(" %c", &choice);
+    switch(choice){
+        case '1':
+            current_date(date);
+            goto jump3;
+        case '2':
+            goto jump2;
+        default:
+            printf("Error, Please try again.\n");
+            goto jump1;
+    }
+    jump2:
+    printf("\nEnter date [YYYY-MM]: ");
     scanf(" %s", date);
-    printf("%s\n", date);
+    // Check is date valid or not
+    strcat(date, "-01");
+    if(!valid_date(date)){
+        printf("Error, Invalid date.\n");
+        goto jump2;
+    }
+    jump3:
+    printf("\n%.7s\n", date);
     FILE *fp = fopen(filename, "r");
     DATA data;
     CAT cat;
     CAT subcat;
     char code[4];
     char str[DATA_LINE];
-    char day[4] = "-00";
-    char date_full[11];
     fgets(str, DATA_LINE, fp);
     while(fgets(str, DATA_LINE, fp) != NULL){
-        if(strncmp(date, str, 7) < 0){
-            printf("No transection.\n");
-            break;
+        edit.max_line++;
+        if(strncmp(date, str, 7) > 0){
+            edit.start_line++;              // Line count
         }else if(strncmp(date, str, 7) == 0){
+            edit.count++;                   // Counter count
             data = stodata(str);
             strcpy(code, data.cat);
             code[2] = '0';
             cat = codetocat(code);
             subcat = codetocat(data.cat);
-            if(strcmp(day, data.date+7) != 0){
-                strcpy(date_full, date);
-                sprintf(day, "%s", data.date+7);
-                strcat(date_full, day);
-                printf("Day %s\n", day+1);
-            }
-            printf("%+12.3lf\t", data.amount*(data.cat[0] == 'E'?-1:1));
+            printf("%03d: [%s]", edit.count, data.date);
+            printf("%+12.3lf| ", data.amount*(data.cat[0] == 'E'?-1:1));
             if(strcmp(data.cat, code) != 0)
-                printf("%s: %s\n", cat.name, subcat.name);
+                printf("%s: %s", cat.name, subcat.name);
             else
-                printf("%s\n", subcat.name);
-            printf("Note: %s\n", data.note);
-        }else
-            continue;
+                printf("%s", subcat.name);
+            printf("\n\tNOTE: %s\n", data.note);
+        }
     }
+    if(edit.count == 0)
+        printf("No transection\n");
     fclose(fp);
+    return edit;
 }
 
 /* Add a new transection */
@@ -100,12 +117,18 @@ void add_trans(char* filename){
     char cat[4];
     select_cat(cat);
     strcpy(trans_data.cat, cat);
-    printf("Enter amount: ");
-    scanf(" %lf", &trans_data.amount);
+    while(enter_amount(&trans_data.amount))
+        printf("Error, Please try again.\n");
     printf("Enter note: ");
     scanf(" %[^\n]", trans_data.note);
-    printf("Enter date [YYYY-MM-DD]: ");
-    scanf(" %s", trans_data.date);
+    while(1){
+        printf("Enter date [YYYY-MM-DD]: ");
+        scanf(" %s", trans_data.date);
+        if(valid_date(trans_data.date)){
+            break;
+        }
+        printf("Error, Invalid date.\n");
+    }
     FILE* fp = fopen(filename, "ab+");
     char str[DATA_LINE];
     datatos(str, trans_data);
@@ -115,10 +138,84 @@ void add_trans(char* filename){
 }
 
 /* Edit a transection */
-void edit_trans(char* filename){
-    view_trans(filename);
+int edit_trans(char* filename){
+    EDIT edit = view_trans(filename);
+    if(edit.count == 0)
+        return 0;
+    jump1:
+    printf("\nChoose line: ");
+    int choice;
+    scanf(" %d", &choice);
+    if(choice <= 0 || choice > edit.count){
+        printf("Error, Please try again.\n");
+        goto jump1;
+    }
+    // Backup file
+    DATA data_ls[edit.max_line];
+    data_list(filename, data_ls);
+    // Display Data
+    CAT cat;
+    CAT subcat;
+    int select_int = edit.start_line+choice;
+    char date[11];
+    char code[4];
+    char act_choice;
+    jump2:
+    strcpy(code, data_ls[select_int].cat);
+    code[2] = '0';
+    cat = codetocat(code);
+    subcat = codetocat(data_ls[select_int].cat);
+    printf("\n1: Date: %s\n", data_ls[select_int].date);
+    printf("2: Amount: %.3lf\n", data_ls[select_int].amount);
+    printf("3: Catagory: ", data_ls[select_int].cat);
+    if(strcmp(data_ls[select_int].cat, code) != 0)
+        printf("%s: %s\n", cat.name, subcat.name);
+    else
+        printf("%s\n", subcat.name);
+    printf("4: Note: %s\n", data_ls[select_int].note);
+    printf("0: Save edit\n");
+    printf("Choose action/line to edit: ");
+    scanf(" %c", &act_choice);
+    switch(act_choice){
+        case '0':
+            break;
+        case '1':
+            while(1){
+                printf("\nEnter date [YYYY-MM-DD]: ");
+                scanf(" %s", date);
+                if(valid_date(date)){
+                    strcpy(data_ls[select_int].date, date);
+                    break;
+                }
+                printf("Error, Invalid date.\n");
+            }
+            goto jump2;            
+        case '2':
+            while(enter_amount(&data_ls[select_int].amount))
+                printf("Error, Please try again.\n");
+            goto jump2;
+        case '3':
+            select_cat(data_ls[select_int].cat);
+            goto jump2;
+        case '4':
+            printf("\nEnter note: ");
+            scanf(" %[^\n]", data_ls[select_int].note);
+        default:
+            printf("Error, Please try again.\n");
+            goto jump2;
+    }
+    // Write file
+    FILE *fp = fopen(filename, "w");
+    char str[DATA_LINE];
+    for(int i = 0; i < edit.max_line; i++){
+        datatos(str, data_ls[i]);
+        fprintf(fp, "%s\n", str);
+    }
+    fclose(fp);
+    return 0;
 }
 
+/* View report */
 void view_report(char* filename){
     
 }
@@ -127,7 +224,7 @@ int take_action(char* filename){
     sort_trans(filename);
     // Overview
     double inflow = 0, outflow = 0;
-    FILE* fp = fopen(filename, "r");
+    FILE *fp = fopen(filename, "r");
     char str[DATA_LINE];
     char currency[4];
     while(fgets(str, DATA_LINE, fp) != NULL){
@@ -166,7 +263,7 @@ int take_action(char* filename){
         case '5':
             return 0;
         default:
-            printf("Error, Please thy again.\n");
+            printf("Error, Please try again.\n");
     }
     return 1;
 }
