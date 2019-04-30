@@ -1,0 +1,53 @@
+﻿CATAGORY LIST
+I00,Income
+I10,Salary
+I20,Award
+I30,Interest
+I40,Gift
+I50,Selling
+I60,Others
+E00,Expense
+E10,Food/Beverage
+E20,Bill
+E21,Water
+E22,Electricity
+E23,Phone
+E24,Gas
+E25,Television
+E26,Internet
+E27,Rental
+E30,Transportation
+E31,Taxi
+E32,Bus
+E33,Train
+E34,Parking Fee
+E35,Petrol
+E40,Travel
+E50,Shopping
+E51,Clothes
+E52,Electronics
+E53,Accessories
+E54,Others
+E60,Entertainments
+E61,Movies
+E62,Games
+E70,Health
+E71,Sports
+E72,Doctor
+E73,Pharmacy
+E74,Insurance
+E80,Gifts/Donations
+E81,Marriage
+E82,Funeral
+E83,Charity
+E90,Family
+E91,Children
+E92,Home improvement
+E93,Home Services
+E94,Pets
+EA0,Friends/Lover
+EB0,Education
+EB1,Books
+EC0,Fee/Charges
+ED0,Business/Investment
+EE0,Others

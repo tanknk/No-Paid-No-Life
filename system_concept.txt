@@ -1,0 +1,49 @@
+time - current date
+
+START
+    - Currency (USD/THB)
+    - Initial Balance
+ACTION
+    - Add Trans.(Transection):
+        - Amount: จำนวนเงินของธุรกรรม
+        - Catagory:
+            - Income: รายรับ
+            - Expense: รายจ่าย
+            - Debt/Loan?: ติดหนี้/จ่ายหนี้, ปล่อยกู้/จ่ายคืน? (ใส่ชื่อคนที่เกี่ยวข้อง?)
+        - Note: Discription, เขียน Note อธิบาย
+        - Date: Specify date, วันที่ทำธุรกรรม
+    - Edit Transection:
+        - Edit/Delete
+    - Stats/Report: สถิติ
+        - Overview:
+            - Inflow/Income
+            - Outflow/Expense
+            - Net Income: Inflow - Outflow
+        - Weekly/Monthly/Yearly?
+        - % ของรายรับ/รายจ่ายว่าใช้ไปในแต่ละ Catagory อะไรเท่าใดบ้าง
+        - Debt (ยืมมาเท่าใด / คืนไปแล้วเหลือที่ติดหนี้เท่าใด)
+        - Loan (ปล่อยกู้ไปเท่าใด / เขาใช้คืนมาเท่าใด)
+
+- Catagory: Income
+    Salary: เงินเดือน
+    Award: รางวัล
+    Interest: ดอกเบี้ย
+    Gift: ของขวัญ
+    Selling: ขายของ
+    Others: อื่นๆ
+
+- Catagory: Expense
+    Food/Beverage: อาหารและเครื่องดื่ม
+    Bills: Water/Electricity/Phone/Gas/Television/Internet/Rental น้ำ/ไฟฟ้า/โทรศัพท์/แก๊ส/โทรทัศน์/อินเทอร์เน็ต/ค่าเช่า
+    Transportation: Taxi/Bus/Train/Parking Fee/Petrol แท็กซี่/รถเมล์/รถไฟ/ค่าจอดรถ/เติมน้ำมัน
+    Travel: ท่องเที่ยว
+    Shopping: Clothes/Electronics/Accessories/Other เสื้อผ้า/เครื่องใช้ไฟฟ้า/เครื่องประดับ/อื่นๆ
+    Entertainments: Movies/Games หนัง/เกม
+    Health: Sports/Doctor/Pharmacy/Insurance กีฬา/หมอ/เภสัช/ประกัน
+    Gifts/Donations: Marriage/Funeral/Charity งานแต่ง/งานศพ/การกุศล
+    Family: Childen/Home Improvemnt/Home Services/Pets
+    Friends/Lover: เพื่อนและแฟน
+    Education: Books
+    Fees/Charges: ค่าธรรมเนียม
+    Business/Investment: บริษัท/การลงทุน
+    Others
