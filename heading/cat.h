@@ -14,7 +14,7 @@ CAT stocat(char* str){
     return cat;
 }
 
-/* Read catagory list */
+/* Read category list */
 void cat_list(CAT* cat){
     FILE* fp = fopen("./data/cat.csv", "r");
     char str[CAT_LINE];
@@ -26,7 +26,7 @@ void cat_list(CAT* cat){
     fclose(fp);
 }
 
-/* Select catagory */
+/* Select category */
 int select_cat(char* str){
     CAT cat_ls[CAT_SIZE];
     cat_list(cat_ls);
@@ -34,7 +34,7 @@ int select_cat(char* str){
     while(1){
         printf("\n1: Income\n");
         printf("2: Expense\n");
-        printf("Choose catagory: ");
+        printf("Choose category: ");
         char choice;
         scanf(" %c", &choice);
         if(choice == '1'){
@@ -55,7 +55,7 @@ int select_cat(char* str){
                     printf("%c: ", cat_ls[i].code[1]);
                 printf("%s\n", cat_ls[i].name);
             }
-        printf("Choose catagory: ");
+        printf("Choose category: ");
         char choice;
         scanf(" %c", &choice);
         for(int i = 0; i < CAT_SIZE; i++){
@@ -67,7 +67,7 @@ int select_cat(char* str){
         printf("Error, Please try again.\n");   
     }
     jump1:
-    // Skip 3rd if catagory is Income
+    // Skip 3rd if category is Income
     if(str[0] == 'I'){
         str[2] = '0';
         goto jump2;
@@ -89,7 +89,7 @@ int select_cat(char* str){
             str[2] = '0';
             goto jump2;
         }
-        printf("Choose catagory: ");
+        printf("Choose category: ");
         char choice;
         scanf(" %c", &choice);
         for(int i = 0; i < CAT_SIZE; i++){

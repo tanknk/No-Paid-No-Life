@@ -4,13 +4,13 @@
 typedef struct{
     char date[11];  // 1st Column: Date (YYYY-MM-DD)
     double amount;  // 2nd Column: [+/-] Amount (Initial Balance for 1st Row)
-    char cat[4];    // 3rd Column: Catagory (Currencyfor 1st Row)
+    char cat[4];    // 3rd Column: Category (Currencyfor 1st Row)
     char note[101]; // 4th Column: Note
 }DATA;
 
 typedef struct{
-    char code[4];   // Catagory Code
-    char name[20];  // Catagory Name
+    char code[4];   // Category Code
+    char name[20];  // Category Name
 }CAT;
 
 typedef struct{
@@ -51,6 +51,13 @@ int valid_date(char *str){
     if(r == -1 || (day != timeinfo.tm_mday) || (month-1 != timeinfo.tm_mon) || (year-1900 != timeinfo.tm_year))
         return 0;
     return 1;
+}
+
+/* Interupt */
+void interupt(){
+    char ch;
+    printf("\nPress any key to continue..");
+    ch = getch();
 }
 
 #endif

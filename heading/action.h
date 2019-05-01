@@ -118,6 +118,7 @@ void add_trans(char* filename){
     char cat[4];
     select_cat(cat);
     strcpy(trans_data.cat, cat);
+    trans_data.cat[3] = '\0';
     while(enter_amount(&trans_data.amount))
         printf("Error, Please try again.\n");
     printf("Enter note: ");
@@ -168,7 +169,7 @@ int edit_trans(char* filename){
     subcat = codetocat(data_ls[select_int].cat);
     printf("\n1: Date: %s\n", data_ls[select_int].date);
     printf("2: Amount: %.3lf\n", data_ls[select_int].amount);
-    printf("3: Catagory: ", data_ls[select_int].cat);
+    printf("3: Category: ", data_ls[select_int].cat);
     if(strcmp(data_ls[select_int].cat, code) != 0)
         printf("%s: %s\n", cat.name, subcat.name);
     else
@@ -201,6 +202,7 @@ int edit_trans(char* filename){
         case '4':
             printf("\nEnter note: ");
             scanf(" %[^\n]", data_ls[select_int].note);
+            goto jump2;
         default:
             printf("Error, Please try again.\n");
             goto jump2;
@@ -259,9 +261,6 @@ void view_report(char* filename, char* currency){
         strcpy(expense[i].name, codetocat(expense[i].code).name);
         expense[i].amount = 0.0;
     }
-    for(int i = 0; i < 15; i++){
-        printf("%s %lf %s\n", expense[i].code, expense[i].amount, expense[i].name);
-    }
     DATA data_ls[lines];
     data_list(filename, data_ls);
     for(int i = 0; i < lines; i++){
@@ -271,7 +270,7 @@ void view_report(char* filename, char* currency){
             if(data_ls[i].cat[0] == 'E'){
                 // expense
                 for(int j = 1; j < 15; j++)
-                    // same sub-catagory
+                    // same sub-category
                     if(data_ls[i].cat[1] == expense[j].code[1]){
                         expense[j].amount += data_ls[i].amount;
                         expense[0].amount += data_ls[i].amount;
@@ -279,7 +278,7 @@ void view_report(char* filename, char* currency){
             }else{
                 // income
                 for(int j = 1; j < 7; j++)
-                    // same sub-catagory
+                    // same sub-category
                     if(data_ls[i].cat[1] == income[j].code[1]){
                         income[j].amount += data_ls[i].amount;
                         income[0].amount += data_ls[i].amount;
@@ -322,35 +321,41 @@ int take_action(char* filename){
         // Currency
         if(trans.cat[0] != 'I' && trans.cat[0] != 'E' )
             strcpy(currency, trans.cat); 
-        // Add to Outflow if Catagory is Expense
+        // Add to Outflow if Category is Expense
         if(trans.cat[0] == 'E')
             outflow += trans.amount;
         else
             inflow += trans.amount;
     }
     fclose(fp);
-    printf("\nOverview:\n");
+    system("cls"); 
+    printf("\n+-------------------------------+\n");
+    printf("Overview\n");
     printf("Inflow: \t%.3f %s\n", inflow, currency);
     printf("Outflow: \t%.3f %s\n", outflow, currency);
     printf("Net Balance: \t%.3f %s\n", inflow-outflow, currency);
+    printf("+-------------------------------+\n");
     // Take action
-    printf("\n1: View Transections\n");
+    printf("\n+--------------------+\n");
+    printf("Choose your action\n");
+    printf("1: View Transections\n");
     printf("2: Add Transection\n");
     printf("3: Edit Transection\n");
     printf("4: View Report\n");
     printf("5: Exit\n");
+    printf("+--------------------+\n");
     printf("Choose action: ");
     char choice;
     scanf(" %c", &choice);
     switch(choice){
         case '1':
-            view_trans(filename); break;
+            system("cls"); view_trans(filename); interupt(); break;
         case '2':
-            add_trans(filename); break;
+            system("cls"); add_trans(filename); interupt(); break;
         case '3':
-            edit_trans(filename); break;
+            system("cls"); edit_trans(filename); interupt(); break;
         case '4':
-            view_report(filename, currency); break;
+            system("cls"); view_report(filename, currency); interupt(); break;
         case '5':
             return 0;
         default:
