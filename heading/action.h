@@ -14,11 +14,11 @@ int count_line(char *filename){
     return count;
 }
 
-/* Sorting transection */
+/* Sorting transaction */
 int sort_trans(char* filename){
     FILE *fp_1 = fopen(filename, "r");
     int count = count_line(filename)-1;
-    // No transection
+    // No transaction
     if(count == 0)
         return 0;
     char start[DATA_LINE];
@@ -45,7 +45,7 @@ int sort_trans(char* filename){
     return 0;
 }
 
-/* View current transections */
+/* View current transactions */
 EDIT view_trans(char* filename){
     EDIT edit;
     edit.count = 0;
@@ -107,12 +107,12 @@ EDIT view_trans(char* filename){
         }
     }
     if(edit.count == 0)
-        printf("No transection\n");
+        printf("No transaction\n");
     fclose(fp);
     return edit;
 }
 
-/* Add a new transection */
+/* Add a new transaction */
 void add_trans(char* filename){
     DATA trans_data;
     char cat[4];
@@ -139,7 +139,7 @@ void add_trans(char* filename){
     fclose(fp);
 }
 
-/* Edit a transection */
+/* Edit a transaction */
 int edit_trans(char* filename){
     EDIT edit = view_trans(filename);
     if(edit.count == 0)
@@ -338,9 +338,9 @@ int take_action(char* filename){
     // Take action
     printf("\n+--------------------+\n");
     printf("Choose your action\n");
-    printf("1: View Transections\n");
-    printf("2: Add Transection\n");
-    printf("3: Edit Transection\n");
+    printf("1: View Transactions\n");
+    printf("2: Add Transaction\n");
+    printf("3: Edit Transaction\n");
     printf("4: View Report\n");
     printf("+--------------------+\n");
     printf("Choose action: ");
