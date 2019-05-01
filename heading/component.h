@@ -19,6 +19,12 @@ typedef struct{
     int max_line;
 }EDIT;
 
+typedef struct{
+    char code[4];
+    char name[20];
+    double amount;
+}STAT;
+
 /* Current date */
 void current_date(char *date){
     time_t t = time(NULL);

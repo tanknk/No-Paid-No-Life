@@ -4,12 +4,13 @@
 #define DATA_LINE 200
 
 /* Counting line of file */
-int count_line(char* filename){
-    FILE *fp = fopen(filename, "r");
+int count_line(char *filename){
+    FILE* fp = fopen(filename, "r");
     int count = 0;
     char str[DATA_LINE];
     while(fgets(str, DATA_LINE, fp) != NULL)
         count++;
+    fclose(fp);
     return count;
 }
 
@@ -216,8 +217,97 @@ int edit_trans(char* filename){
 }
 
 /* View report */
-void view_report(char* filename){
-    
+void view_report(char* filename, char* currency){
+    // monthly/yearly
+    char date[11];
+    char date_check[11];
+    jump:
+    printf("\nEnter date [YYYY/YYYY-MM]: ");
+    scanf(" %s", date);
+    strcpy(date_check, date);
+    if(strlen(date) == 4){
+        strcat(date_check, "-01-01");
+    }else if(strlen(date) == 7){
+        strcat(date_check, "-01");
+    }
+    // check valid date
+    if(!valid_date(date_check)){
+        printf("Error, Invalid date.\n");
+        goto jump;
+    }
+    // read file
+    FILE *fp = fopen(filename, "r");
+    int lines = count_line(filename);
+    double initial = 0.0;
+    // income
+    STAT income[7];
+    for(int i = 0; i < 7; i++){
+        strcpy(income[i].code, "I");
+        income[i].code[1] = 48+i;
+        income[i].code[2] = '0';
+        income[i].code[3] = '\0';
+        strcpy(income[i].name, codetocat(income[i].code).name);
+        income[i].amount = 0.0;
+    }
+    // expense
+    STAT expense[15];
+    for(int i = 0; i < 15; i++){
+        strcpy(expense[i].code, "E");
+        expense[i].code[1] = i+(i<=9?48:55);
+        expense[i].code[2] = '0';
+        expense[i].code[3] = '\0';
+        strcpy(expense[i].name, codetocat(expense[i].code).name);
+        expense[i].amount = 0.0;
+    }
+    for(int i = 0; i < 15; i++){
+        printf("%s %lf %s\n", expense[i].code, expense[i].amount, expense[i].name);
+    }
+    DATA data_ls[lines];
+    data_list(filename, data_ls);
+    for(int i = 0; i < lines; i++){
+        if(strncmp(date, data_ls[i].date, strlen(date)) > 0){
+            initial += ((data_ls[i].cat[0] == 'E'?-1:1)*data_ls[i].amount);
+        }else if(strncmp(date, data_ls[i].date, strlen(date)) == 0){
+            if(data_ls[i].cat[0] == 'E'){
+                // expense
+                for(int j = 1; j < 15; j++)
+                    // same sub-catagory
+                    if(data_ls[i].cat[1] == expense[j].code[1]){
+                        expense[j].amount += data_ls[i].amount;
+                        expense[0].amount += data_ls[i].amount;
+                    }
+            }else{
+                // income
+                for(int j = 1; j < 7; j++)
+                    // same sub-catagory
+                    if(data_ls[i].cat[1] == income[j].code[1]){
+                        income[j].amount += data_ls[i].amount;
+                        income[0].amount += data_ls[i].amount;
+                    }
+            }
+        }
+    }
+    fclose(fp);
+    // overview report
+    CAT cat;
+    char code[4];
+    printf("\n%s Report:\n", date);
+    printf("Initial: %.3lf %s\n", initial, currency);
+    printf("Income: %.3lf %s\n", income[0].amount, currency);
+    printf("Expense: %.3lf %s\n", expense[0].amount, currency);
+    printf("Net: %.3lf %s\n", initial+income[0].amount-expense[0].amount, currency);
+    // income report
+    printf("\nIncome:\n");
+    for(int i = 1; i < 7; i++)
+        if(income[i].amount > 0){
+            printf("[%6.2lf%%] %+12.3lf| %s\n", 100*income[i].amount/income[0].amount, income[i].amount, income[i].name);
+        }
+    // expense report
+    printf("\nExpense:\n");
+    for(int i = 1; i < 15; i++)
+        if(expense[i].amount > 0){
+            printf("[%6.2lf%%] %+12.3lf| %s\n", 100*expense[i].amount/expense[0].amount, expense[i].amount, expense[i].name);
+        }
 }
 
 int take_action(char* filename){
@@ -239,7 +329,8 @@ int take_action(char* filename){
             inflow += trans.amount;
     }
     fclose(fp);
-    printf("\nInflow: \t%.3f %s\n", inflow, currency);
+    printf("\nOverview:\n");
+    printf("Inflow: \t%.3f %s\n", inflow, currency);
     printf("Outflow: \t%.3f %s\n", outflow, currency);
     printf("Net Balance: \t%.3f %s\n", inflow-outflow, currency);
     // Take action
@@ -259,7 +350,7 @@ int take_action(char* filename){
         case '3':
             edit_trans(filename); break;
         case '4':
-            view_report(filename); break;
+            view_report(filename, currency); break;
         case '5':
             return 0;
         default:

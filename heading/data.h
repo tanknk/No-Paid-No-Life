@@ -62,7 +62,7 @@ int enter_balance(double* double_ptr){
 
 /* Enter amount */
 int enter_amount(double* double_ptr){
-    printf("\nEnter amount: ");
+    printf("Enter amount: ");
     scanf(" %lf", double_ptr);
     if(*double_ptr >= 0)
         return 0;
