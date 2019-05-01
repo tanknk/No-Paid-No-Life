@@ -7,7 +7,7 @@
 
 # Objective
 <pre>
-- ทำให้ผู้ใช้ทราบพฤกติกรรมการใช้เงินของตน และนำไปปรับใช้ </br>
+- ทำให้ผู้ใช้ทราบพฤกติกรรมการใช้เงินของตน และนำไปปรับใช้ <br />
 - แม้ผู้ใฃ้จะไม่เคยทำรายรับรายจ่ายมาก่อนก็สามารถใช้งานได้
 </pre>
 
@@ -19,7 +19,7 @@ Coming Soon...
 # Author
 <pre>
  <b>IT KMITL#16</b> <br />
- <b>Faculty of Information Technology, KMITL</b>
+ <b>Faculty of Information Technology, KMITL</b> <br />
  1) Miss Kesaranee Trisawatwong  61070018 <br />
  2) Mr.  Kunakorn  Kositsakul    61070020 <br />
  3) Mr.  Nattakit  Sumreth       61070052 <br />
