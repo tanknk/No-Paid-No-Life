@@ -27,6 +27,10 @@ Coming Soon...
  </pre>
 <br />
 
-โปรเจกต์นี้เป็นส่วนหนึ่งของวิชา Computer Programming ภาคเรียนที่ 2 ปีการศึกษา 2561<br /><br />
+โปรเจกต์นี้เป็นส่วนหนึ่งของวิชา Computer Programming<br />
+หลักสูตรวิทยาศาสตร์บัณฑิต สาขาวิชาเทคโนโลยีสารสนเทศ<br />
+ภาคเรียนที่ 2 ปีการศึกษา 2561<br />
+คณะเทคโนโลยีสารสนเทศ<br />
+สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง<br /><br />
  
 <img src="https://forthebadge.com/images/badges/made-with-c.svg"/>&nbsp;&nbsp;<img src="https://forthebadge.com/images/badges/built-with-love.svg"/>
