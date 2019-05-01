@@ -25,4 +25,8 @@ Coming Soon...
  3) Mr.  Nattakit  Sumreth       61070052 <br />
  4) Mr.  Saran     Hanthongkam   61070216 <br />
  </pre>
+<br />
+
+โปรเจกต์นี้เป็นส่วนหนึ่งของวิชา Computer Programming ภาคเรียนที่ 2 ปีการศึกษา 2561<br />
+ 
 <img src="https://forthebadge.com/images/badges/made-with-c.svg"/>&nbsp;&nbsp;<img src="https://forthebadge.com/images/badges/built-with-love.svg"/>
