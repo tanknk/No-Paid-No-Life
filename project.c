@@ -258,7 +258,6 @@ int intro(){
     printf("WELCOME TO NO PAID NO LIFE\n");
     printf("1: Sign up\n");
     printf("2: Sign in\n");
-    printf("3: Exit\n");
     printf("+------------------------+\n");
     jump:
     printf("Choose action: ");
@@ -266,7 +265,6 @@ int intro(){
     switch(decision){
         case '1': regis(); break;
         case '2': login(); break;
-        case '3': return 0; break;
         default: printf("Error, Please try again.\n"); goto jump;
     }
 }

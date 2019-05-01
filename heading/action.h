@@ -342,7 +342,6 @@ int take_action(char* filename){
     printf("2: Add Transection\n");
     printf("3: Edit Transection\n");
     printf("4: View Report\n");
-    printf("5: Exit\n");
     printf("+--------------------+\n");
     printf("Choose action: ");
     char choice;
@@ -356,8 +355,6 @@ int take_action(char* filename){
             system("cls"); edit_trans(filename); interupt(); break;
         case '4':
             system("cls"); view_report(filename, currency); interupt(); break;
-        case '5':
-            return 0;
         default:
             printf("Error, Please try again.\n");
     }
