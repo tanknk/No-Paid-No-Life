@@ -19,10 +19,10 @@ Coming Soon...
 # Author
 <pre>
  <b>IT KMITL#16</b> <br />
+ <b>Faculty of Information Technology, KMITL</b>
  1) Miss Kesaranee Trisawatwong  61070018 <br />
  2) Mr.  Kunakorn  Kositsakul    61070020 <br />
  3) Mr.  Nattakit  Sumreth       61070052 <br />
  4) Mr.  Saran     Hanthongkam   61070216 <br />
  </pre>
-Faculty of Information Technology, KMIT<br />
 <img src="https://forthebadge.com/images/badges/made-with-c.svg"/>&nbsp;&nbsp;<img src="https://forthebadge.com/images/badges/built-with-love.svg"/>
