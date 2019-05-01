@@ -13,7 +13,7 @@
 
 # Presentation Video
 <pre>
-Coming Soon...
+<a href="https://youtu.be/vzDTV1dUQnc">https://youtu.be/vzDTV1dUQnc</a>
 </pre>
 
 # Author
