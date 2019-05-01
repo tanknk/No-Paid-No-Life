@@ -21,6 +21,7 @@ struct idcheck{
 int regis();
 int intro();
 int login();
+int interrupt();
 
 int main(){
     intro();
